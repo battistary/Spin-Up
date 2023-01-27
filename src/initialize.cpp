@@ -1,4 +1,8 @@
 #include "main.h"
+#include "pros/llemu.h"
+#include "pros/motors.h"
+#include "pros/rtos.h"
+#include "pros/screen.hpp"
 
 /**
  * A callback function for LLEMU's center button.
@@ -26,7 +30,25 @@ void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::set_text(1, "Hello PROS User!");
 
-	pros::lcd::register_btn1_cb(on_center_button);
+	// Drive motors
+	driveLeftBack.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	driveLeftCenter.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	driveLeftFront.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	driveRightBack.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	driveRightCenter.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	driveRightBack.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+
+	// Motor groups
+	driveLeft.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
+	driveRight.set_brake_modes(pros::E_MOTOR_BRAKE_COAST);
+
+	// Subsystem Motors
+	intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	flywheel.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+
+	// Pneumatics
+	stringLauncher1.set_value(0);
+	stringLauncher2.set_value(0);
 }
 
 /**

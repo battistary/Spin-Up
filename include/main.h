@@ -75,6 +75,7 @@ void opcontrol(void);
 #include "subsystemHeaders/drive.hpp"
 #include "subsystemHeaders/flywheel.hpp"
 #include "subsystemHeaders/intake.hpp"
+#include "subsystemHeaders/stringLauncher.hpp"
 #include "subsystemHeaders/globals.hpp"
 //#include <iostream>
 #endif
