@@ -77,6 +77,8 @@ void opcontrol(void);
 #include "subsystemHeaders/intake.hpp"
 #include "subsystemHeaders/stringLauncher.hpp"
 #include "subsystemHeaders/globals.hpp"
+#include "autoSelect/selection.h"
+#include "gif-pros/gifclass.hpp"
 //#include <iostream>
 #endif
 

@@ -26,10 +26,13 @@ void opcontrol() {
 	stringLauncher1.set_value(0);
 	stringLauncher2.set_value(0);
 
+	// Display gif image on brain screen
+	Gif gif("/usd/tipping_point_HD.gif", lv_scr_act());
+
 	// Chassis controller
 	std::shared_ptr<ChassisController> drive =
 		ChassisControllerBuilder()
-			.withMotors({5, 18}, {7, 20}, {6, 19})
+			.withMotors({5, 6, 7}, {16, 17, 20})
 			// Speed gearset, 2.75" wheel diameter, 11" wheel track
 			.withDimensions(AbstractMotor::gearset::blue, {{2.75_in, 11_in}, imev5BlueTPR})
 			//.withGains(

@@ -1,3 +1,4 @@
+#include "autoSelect/selection.h"
 #include "main.h"
 
 /**
@@ -11,4 +12,16 @@
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+    if (selector::auton == 1 || selector::auton == -1) {
+        // Run auton #1
+    }
+    
+    else if (selector::auton == 2 || selector::auton == -2) {
+        // Run auton #1
+    }
+    
+    else if (selector::auton == 0) {
+        // Skills auton
+    }
+}

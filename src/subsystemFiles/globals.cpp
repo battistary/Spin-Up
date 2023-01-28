@@ -1,8 +1,8 @@
 #include "main.h"
 
 // Controllers
-okapi::Controller controller1(pros::E_CONTROLLER_MASTER);
-okapi::Controller controller2(pros::E_CONTROLLER_PARTNER);
+okapi::Controller controller1(ControllerId::master);
+okapi::Controller controller2(ControllerId::partner);
 
 // Motors
 pros::Motor driveLeftFront(5, pros::E_MOTOR_GEARSET_06, true, pros::E_MOTOR_ENCODER_COUNTS);
