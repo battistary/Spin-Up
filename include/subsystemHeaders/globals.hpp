@@ -1,4 +1,5 @@
 #include "main.h"
+#include "pros/adi.hpp"
 
 // Controllers
 extern okapi::Controller controller1;
@@ -21,3 +22,6 @@ extern pros::Motor_Group driveRight;
 // ADI Digital Outs
 extern pros::ADIDigitalOut stringLauncher1;
 extern pros::ADIDigitalOut stringLauncher2;
+
+// Inertial Sensor
+extern pros::Imu inertial;

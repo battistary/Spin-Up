@@ -1,4 +1,5 @@
 #include "main.h"
+#include "pros/adi.hpp"
 
 // Controllers
 okapi::Controller controller1(ControllerId::master);
@@ -21,3 +22,6 @@ pros::Motor_Group driveRight({driveRightBack, driveRightCenter, driveRightFront}
 // ADI Digital Outs
 pros::ADIDigitalOut stringLauncher1('A', false);
 pros::ADIDigitalOut stringLauncher2('B', false);
+
+// Inertial Sensor
+pros::Imu inertial(4);

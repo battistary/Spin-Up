@@ -3,5 +3,9 @@
 // Helper functions
 void setDrive(int left, int right);
 
-// Driver control functions
-void setDriveMotors();
+void resetDriveEncoders();
+
+double avgDriveEncoderValue();
+
+// Autonomous driving functions
+void translate(int units, int voltage);
