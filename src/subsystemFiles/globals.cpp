@@ -24,4 +24,4 @@ pros::ADIDigitalOut stringLauncher1('A', false);
 pros::ADIDigitalOut stringLauncher2('B', false);
 
 // Inertial Sensor
-pros::Imu inertial(4);
+pros::Imu imu(4);

@@ -24,4 +24,4 @@ extern pros::ADIDigitalOut stringLauncher1;
 extern pros::ADIDigitalOut stringLauncher2;
 
 // Inertial Sensor
-extern pros::Imu inertial;
+extern pros::Imu imu;

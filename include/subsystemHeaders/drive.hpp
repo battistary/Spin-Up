@@ -9,3 +9,5 @@ double avgDriveEncoderValue();
 
 // Autonomous driving functions
 void translate(int units, int voltage);
+
+void rotate(int degrees, int voltage);

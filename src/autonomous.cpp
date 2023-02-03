@@ -14,7 +14,7 @@
  */
 void autonomous() {
     if (selector::auton == 1 || selector::auton == -1) {
-        // Run auton #1
+        translate(500, 85);
     }
     
     else if (selector::auton == 2 || selector::auton == -2) {

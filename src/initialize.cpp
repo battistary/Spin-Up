@@ -52,10 +52,10 @@ void initialize() {
 	stringLauncher2.set_value(0);
 
 	// Inertial Sensor
-	inertial.reset();
+	imu.reset();
 	int time = pros::millis();
   	int iter = 0;
-  	while (inertial.is_calibrating()) {
+  	while (imu.is_calibrating()) {
     	printf("IMU calibrating... %d\n", iter);
     	iter += 10;
     	pros::delay(10);
