@@ -1,4 +1,3 @@
-#include "autoSelect/selection.h"
 #include "main.h"
 
 /**
@@ -18,7 +17,7 @@ void autonomous() {
     }
     
     else if (selector::auton == 2 || selector::auton == -2) {
-        // Run auton #1
+        // Run auton #2
     }
     
     else if (selector::auton == 0) {

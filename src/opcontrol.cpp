@@ -33,8 +33,8 @@ void opcontrol() {
 	std::shared_ptr<ChassisController> drive =
 		ChassisControllerBuilder()
 			.withMotors({5, 6, 7}, {16, 17, 20})
-			// Speed gearset, 2.75" wheel diameter, 11" wheel track
-			.withDimensions(AbstractMotor::gearset::blue, {{2.75_in, 11_in}, imev5BlueTPR})
+			// Speed gearset, 36:48 gear ratio, 2.75" wheel diameter, 10.75" wheel track
+			.withDimensions({AbstractMotor::gearset::blue, (36.0 / 48.0)}, {{2.75_in, 10.75_in}, imev5BlueTPR})
 			//.withGains(
 			//	{0, 0, 0},	// Distance controller gains
 			//	{0, 0, 0},	// Turn controller gains
