@@ -26,8 +26,8 @@ pros::ADIDigitalOut stringLauncher2('B', false);
 // Inertial Sensor
 pros::Imu imu(4);
 
-// Chassis controller
-std::shared_ptr<OdomChassisController> chassis =
+// Chassis Controller
+std::shared_ptr<okapi::OdomChassisController> chassis =
     ChassisControllerBuilder()
         .withMotors({5, 6, 7}, {16, 17, 20})
         // Speed gearset, 36:48 gear ratio, 2.75" wheel diameter, 10.75" wheel track
