@@ -29,7 +29,7 @@ void opcontrol() {
 	// Display gif image on brain screen
 	static Gif gif("/usd/logo_unstretched.gif", lv_scr_act());
 
-	while(true) {
+	while (true) {
 		// Control drivetrain
 		chassis->getModel()->arcade(
 			controller1.getAnalog(ControllerAnalog::leftY),
