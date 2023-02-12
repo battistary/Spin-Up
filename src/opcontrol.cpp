@@ -31,7 +31,7 @@ void opcontrol() {
 
 	while(true) {
 		// Control drivetrain
-		drive->getModel()->arcade(
+		chassis->getModel()->arcade(
 			controller1.getAnalog(ControllerAnalog::leftY),
 			controller1.getAnalog(ControllerAnalog::rightX));
 		// Control intake & rollerRoller
