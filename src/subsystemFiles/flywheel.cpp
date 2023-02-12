@@ -9,7 +9,7 @@ void setFlywheel(int power) {
 
 // Flywheel control functions
 void setFlywheelMotor() {
-    //R1 fwd, R2 disabled
+    // R1 forward, R2 disabled
     int flywheelPower = 0;
     if (controller1.getDigital(ControllerDigital::R1)) {
         flywheelPower = 127;
