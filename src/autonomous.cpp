@@ -18,11 +18,11 @@ void autonomous() {
     if (selector::auton == 1 || selector::auton == -1) {        // Left side match auton
         // Set the odometric state to zero
         chassis->setState({0_in, 0_in, 0_deg});
-        
+
         // Step 1
         chassis->driveToPoint({1_in, 0_in});
     }
-    
+
     else if (selector::auton == 2 || selector::auton == -2) {   // Right side match auton
         // Set the odometric state to zero
         chassis->setState({0_in, 0_in, 0_deg});
@@ -30,7 +30,7 @@ void autonomous() {
         // Step 1
         chassis->driveToPoint({1_in, 0_in});
     }
-    
+
     else if (selector::auton == 0) {                            // Skills auton
         // Set the odometric state to zero
         chassis->setState({0_in, 0_in, 0_deg});
