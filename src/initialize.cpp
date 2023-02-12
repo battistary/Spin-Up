@@ -27,9 +27,8 @@ void on_center_button() {
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-	// Brain screen & autonomous selector
+	// Brain screen
 	pros::lcd::initialize();
-	selector::init();
 
 	// Drive motors
 	driveLeftBack.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
@@ -69,7 +68,10 @@ void initialize() {
  * the VEX Competition Switch, following either autonomous or opcontrol. When
  * the robot is enabled, this task will exit.
  */
-void disabled() {}
+void disabled() {
+	// Autonomous selector
+	selector::init();
+}
 
 /**
  * Runs after initialize(), and before autonomous when connected to the Field
@@ -80,4 +82,7 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-void competition_initialize() {}
+void competition_initialize() {
+	// Autonomous selector
+	selector::init();
+}

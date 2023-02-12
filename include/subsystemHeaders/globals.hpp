@@ -25,3 +25,6 @@ extern pros::ADIDigitalOut stringLauncher2;
 
 // Inertial Sensor
 extern pros::Imu imu;
+
+// OkapiLib's ChassisController
+extern std::shared_ptr<OdomChassisController> chassis;
