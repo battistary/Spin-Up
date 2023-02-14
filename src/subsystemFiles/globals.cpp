@@ -8,7 +8,7 @@ okapi::Controller controller2(ControllerId::partner);
 // Motors
 pros::Motor driveLeftFront(5, pros::E_MOTOR_GEARSET_06, true, pros::E_MOTOR_ENCODER_COUNTS);
 pros::Motor driveLeftCenter(6, pros::E_MOTOR_GEARSET_06, true, pros::E_MOTOR_ENCODER_COUNTS);
-pros::Motor driveLeftBack(7, pros::E_MOTOR_GEARSET_06, true, pros::E_MOTOR_ENCODER_COUNTS);
+pros::Motor driveLeftBack(10, pros::E_MOTOR_GEARSET_06, true, pros::E_MOTOR_ENCODER_COUNTS);
 pros::Motor driveRightFront(18, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
 pros::Motor driveRightCenter(19, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
 pros::Motor driveRightBack(20, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
@@ -34,7 +34,7 @@ std::shared_ptr<okapi::OdomChassisController> chassis =
         .withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 10.75_in}, imev5BlueTPR})
         .withGains(
             {0.00063, 0, 0.000013},	// Distance controller gains
-            {0.001, 0, 0.0001},	// Turn controller gains
+            {0.0023, 0, 0.00013},	// Turn controller gains
             {0.001, 0, 0.0001})	// Angle controller gains
         .withOdometry() // Use the same scales as the chassis (above) for odometry (not worth it without encoders & tracking wheel)
         .withMaxVelocity(600)
