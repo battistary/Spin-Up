@@ -27,9 +27,6 @@ void on_center_button() {
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-	// Brain screen
-	pros::lcd::initialize();
-
 	// Drive motors
 	driveLeftBack.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	driveLeftCenter.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
