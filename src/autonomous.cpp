@@ -20,7 +20,7 @@ void autonomous() {
         chassis->setState({0_in, 0_in, 0_deg});
 
         // Step 1
-        chassis->driveToPoint({1_in, 0_in});
+        chassis->driveToPoint({48_in, 0_in});
     }
 
     else if (selector::auton == 2 || selector::auton == -2) {   // Right side match auton
@@ -28,7 +28,7 @@ void autonomous() {
         chassis->setState({0_in, 0_in, 0_deg});
 
         // Step 1
-        chassis->driveToPoint({1_in, 0_in});
+        chassis->driveToPoint({48_in, 0_in});
     }
 
     else if (selector::auton == 0) {                            // Skills auton
@@ -36,7 +36,7 @@ void autonomous() {
         chassis->setState({0_in, 0_in, 0_deg});
 
         // Step 1
-        chassis->driveToPoint({1_in, 0_in});
+        chassis->driveToPoint({48_in, 0_in});
 
         // Examples:
         // turn 45 degrees and drive approximately 1.4 ft
