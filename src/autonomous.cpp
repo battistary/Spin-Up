@@ -15,8 +15,12 @@ void autonomous() {
     // Display gif image on brain screen
     static Gif gif("/usd/logo_unstretched.gif", lv_scr_act());
 
-    if (selector::auton == 1 || selector::auton == -1) {        // Left side match auton
-        // Set the odometric state to zero
+    /**************************************
+    *        Left side match auton        *
+    **************************************/
+
+    if (selector::auton == 1 || selector::auton == -1) {
+        // Set the odometric starting position
         chassis->setState({0_in, 0_in, 0_deg});
 
         // Step 1
@@ -27,8 +31,12 @@ void autonomous() {
         rotate(90, 80);
     }
 
-    else if (selector::auton == 2 || selector::auton == -2) {   // Right side match auton
-        // Set the odometric state to zero
+    /**************************************
+    *        Right side match auton       *
+    **************************************/
+    
+    else if (selector::auton == 2 || selector::auton == -2) {
+        // Set the odometric starting position
         chassis->setState({0_in, 0_in, 0_deg});
 
         // Distance PID
@@ -36,13 +44,18 @@ void autonomous() {
         //chassis->turnToAngle(90_deg);
     }
 
-    else if (selector::auton == 0) {                            // Skills auton
-        // Set the odometric state to zero
-        chassis->setState({0_in, 0_in, 0_deg});
+    /**************************************
+    *             Skills auton            *
+    **************************************/
 
-        // Turn PID
-        //chassis->driveToPoint({48_in, 0_in});
-        chassis->turnToAngle(90_deg);
+    else if (selector::auton == 0) {
+        // Set the odometric starting position
+        chassis->setState({16_in, 24_in, 0_deg});
+
+        chassis->driveToPoint({0_in, 0_in});
+        
+        intake.move_relative(330, 127);
+        intake.brake();
 
         // Examples:
         // turn 45 degrees and drive approximately 1.4 ft
