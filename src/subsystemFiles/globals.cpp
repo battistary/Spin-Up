@@ -37,7 +37,7 @@ std::shared_ptr<okapi::OdomChassisController> chassis =
         .withGains(
             {0.00063, 0, 0.000013},	// Distance controller gains
             {0.00179, 0, 0.000034},	// Turn controller gains
-            {0.001, 0, 0.0001})	// Angle controller gains
+            {0.001,   0, 0.0001  })	// Angle controller gains
         .withOdometry() // Use the same scales as the chassis (above) for odometry (not worth it without encoders & tracking wheel)
         .withMaxVelocity(600)
         .buildOdometry();

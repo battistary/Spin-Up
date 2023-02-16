@@ -55,6 +55,9 @@ void autonomous() {
         chassis->driveToPoint({0_in, 0_in});
         
         intake.move_relative(330, 127);
+        while (!((intake.get_position() < 333) && (intake.get_position() > 297))) {
+            pros::delay(2);
+        }
         intake.brake();
 
         // Examples:
