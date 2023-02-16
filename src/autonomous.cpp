@@ -21,22 +21,26 @@ void autonomous() {
 
         // Step 1
         //chassis->driveToPoint({48_in, 0_in});
-        chassis->turnToAngle(90_deg);
+        //chassis->turnToAngle(90_deg);
+
+        // Test out gyro turns
+        rotate(90, 80);
     }
 
     else if (selector::auton == 2 || selector::auton == -2) {   // Right side match auton
         // Set the odometric state to zero
         chassis->setState({0_in, 0_in, 0_deg});
 
-        // Step 1
-        chassis->turnToAngle(90_deg);
+        // Distance PID
+        chassis->driveToPoint({48_in, 0_in});
+        //chassis->turnToAngle(90_deg);
     }
 
     else if (selector::auton == 0) {                            // Skills auton
         // Set the odometric state to zero
         chassis->setState({0_in, 0_in, 0_deg});
 
-        // Step 1
+        // Turn PID
         //chassis->driveToPoint({48_in, 0_in});
         chassis->turnToAngle(90_deg);
 
