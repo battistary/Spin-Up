@@ -5,7 +5,7 @@
 //selector configuration
 #define HUE 360
 #define DEFAULT 1
-#define AUTONS "Distance PD", "Gyro Turn", "Turn PD"
+#define AUTONS "Turn PD", "Distance PD", "Skills (roller)"
 
 namespace selector{
 

@@ -23,7 +23,7 @@ void autonomous() {
         // Set the odometric starting position
         chassis->setState({0_in, 0_in, 0_deg});
 
-        // Step 1
+        // Turn PD
         chassis->turnToAngle(90_deg);
     }
 
@@ -35,9 +35,8 @@ void autonomous() {
         // Set the odometric starting position
         chassis->setState({0_in, 0_in, 0_deg});
 
-        // Distance PID
+        // Distance PD
         chassis->driveToPoint({48_in, 0_in});
-        //chassis->turnToAngle(90_deg);
     }
 
     /**************************************
@@ -45,23 +44,33 @@ void autonomous() {
     **************************************/
 
     else if (selector::auton == 0) {
-        // Set the odometric starting position
+        // Set the odometric starting position (front-middle align)
         chassis->setState({6_in, 36_in, 0_deg});
 
         chassis->driveToPoint({0_in, 36_in}, true);
-        
-        intake.move_relative(330, 127);
-        //while (!((intake.get_position() < 335) && (intake.get_position() > 325))) {
-        //    pros::delay(2);
-        //}
-        //intake.brake();
+        chassis->waitUntilSettled();
+        intakeController->setTarget(330);
+        intakeController->waitUntilSettled();
 
-        // Examples:
+
+        // Drive Examples:
         // turn 45 degrees and drive approximately 1.4 ft
         //chassis->driveToPoint({1_ft, 1_ft});
         // turn approximately 45 degrees to end up at 90 degrees
         //chassis->turnToAngle(90_deg);
         // turn approximately -90 degrees to face {5_ft, 0_ft} which is to the north of the robot
         //chassis->turnToPoint({5_ft, 0_ft});
+
+        // Intake Examples:
+        // spin 330 degrees
+        // intakeController->setTarget(330);
+        // wait for movement to finish
+        // intakeController->waitUntilSettled();
+
+        // Flywheel Examples:
+        // spin flywheel forward at max voltage (-127 to +127)
+        // flywheel.move(127);
+        // stop flywheel
+        // flywheel.brake();
     }
 }

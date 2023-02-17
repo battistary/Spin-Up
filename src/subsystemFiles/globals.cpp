@@ -41,3 +41,10 @@ std::shared_ptr<okapi::OdomChassisController> chassis =
         .withOdometry() // Use the same scales as the chassis (above) for odometry
         .withMaxVelocity(600)
         .buildOdometry();
+
+// Intake Controller
+std::shared_ptr<AsyncPositionController<double, double>> intakeController = 
+  AsyncPosControllerBuilder()
+    .withMotor(11)
+    .withMaxVelocity(200)
+    .build();
