@@ -24,11 +24,7 @@ void autonomous() {
         chassis->setState({0_in, 0_in, 0_deg});
 
         // Step 1
-        //chassis->driveToPoint({48_in, 0_in});
-        //chassis->turnToAngle(90_deg);
-
-        // Test out gyro turns
-        rotate(90, 80);
+        chassis->turnToAngle(90_deg);
     }
 
     /**************************************
@@ -50,15 +46,15 @@ void autonomous() {
 
     else if (selector::auton == 0) {
         // Set the odometric starting position
-        chassis->setState({16_in, 24_in, 0_deg});
+        chassis->setState({6_in, 36_in, 0_deg});
 
-        chassis->driveToPoint({0_in, 0_in});
+        chassis->driveToPoint({0_in, 36_in}, true);
         
         intake.move_relative(330, 127);
-        while (!((intake.get_position() < 333) && (intake.get_position() > 297))) {
-            pros::delay(2);
-        }
-        intake.brake();
+        //while (!((intake.get_position() < 335) && (intake.get_position() > 325))) {
+        //    pros::delay(2);
+        //}
+        //intake.brake();
 
         // Examples:
         // turn 45 degrees and drive approximately 1.4 ft
