@@ -32,12 +32,12 @@ pros::Imu imu(4);
 std::shared_ptr<okapi::OdomChassisController> chassis =
     ChassisControllerBuilder()
         .withMotors({5, 6, 7}, {16, 17, 20})
-        // Speed gearset, 36:48 gear ratio, 2.75" wheel diameter, 10.75" wheel track
+        // Speed gearset, 36:48 gear ratio, 3.25" wheel diameter, 10.75" wheel track
         .withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 10.75_in}, imev5BlueTPR})
         .withGains(
             {0.00063, 0, 0.000013},	// Distance controller gains
             {0.00179, 0, 0.000034})	// Turn controller gains
 //          {0.001,   0, 0.0001  })	// Angle controller gains
-        .withOdometry() // Use the same scales as the chassis (above) for odometry (not worth it without encoders & tracking wheel)
+        .withOdometry() // Use the same scales as the chassis (above) for odometry
         .withMaxVelocity(600)
         .buildOdometry();
