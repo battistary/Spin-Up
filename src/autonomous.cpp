@@ -44,14 +44,29 @@ void autonomous() {
     **************************************/
 
     else if (selector::auton == 0) {
+        // Assumes robot is 13" wide and 17.5" long
         // Set the odometric starting position (front-middle align)
-        chassis->setState({6_in, 36_in, 0_deg});
+        chassis->setState({6_in, 29.5_in, 0_deg});
 
-        chassis->driveToPoint({0_in, 36_in}, true);
+        chassis->driveToPoint({0_in, 29.5_in}, true);
         chassis->waitUntilSettled();
         intakeController->setTarget(330);
         intakeController->waitUntilSettled();
 
+        chassis->driveToPoint({5.5_in, 29.5_in});
+        intake.move(127);
+        chassis->driveToPoint({29.5_in, 5.5_in});
+        chassis->waitUntilSettled();
+        intake.brake();
+        chassis->driveToPoint({79_in, 5.5_in});
+        chassis->waitUntilSettled();
+        flywheel.move(92);
+        intakeController.setTarget(-180);
+        pros::delay(1000);
+        intakeController.setTarget(-180);
+        pros::delay(1000);
+        intakeController.setTarget(-180);
+        flywheel.brake();
 
         // Drive Examples:
         // turn 45 degrees and drive approximately 1.4 ft
