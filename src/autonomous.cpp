@@ -36,7 +36,7 @@ void autonomous() {
     /**************************************
     *        Right side match auton       *
     **************************************/
-    
+
     else if (selector::auton == 2 || selector::auton == -2) {
         // Set the odometric starting position
         chassis->setState({0_in, 0_in, 0_deg});
@@ -50,33 +50,103 @@ void autonomous() {
     **************************************/
 
     else if (selector::auton == 0) {
+        // Assumes robot is 13" wide and 17.5" long
         // Set the odometric starting position (front-middle align)
-        chassis->setState({6_in, 36_in, 0_deg});
+        // Notation: {Forward, Right}
+        chassis->setState({6.5_in, 29.5_in, 0_deg});
 
-        chassis->driveToPoint({0_in, 36_in}, true);
+        // Drive backwards and spin roller
+        chassis->driveToPoint({0_in, 29.5_in}, true); // adjust for roller
         chassis->waitUntilSettled();
         intakeController->setTarget(330);
         intakeController->waitUntilSettled();
 
+        // Drive to next roller, get disc, and spin
+        chassis->driveToPoint({3.25_in, 29.5_in});
+        intake.move(127);
+        chassis->driveToPoint({27.25_in, 5.5_in});
+        chassis->waitUntilSettled();
+        intake.brake();
+        chassis->driveToPoint({27.25_in, 0_in}, true); // adjust for roller
+        chassis->waitUntilSettled();
+        intakeController->setTarget(330);
+        intakeController->waitUntilSettled();
 
-        // Drive Examples:
-        // turn 45 degrees and drive approximately 1.4 ft
-        //chassis->driveToPoint({1_ft, 1_ft});
-        // turn approximately 45 degrees to end up at 90 degrees
-        //chassis->turnToAngle(90_deg);
-        // turn approximately -90 degrees to face {5_ft, 0_ft} which is to the north of the robot
-        //chassis->turnToPoint({5_ft, 0_ft});
+        // Drive to goal and shoot 3 discs
+        chassis->driveToPoint({27.25_in, 5.5_in});
+        chassis->driveToPoint({78.5_in, 5.5_in});
+        flywheel.move(92);
+        chassis->waitUntilSettled();
+        intakeController.setTarget(-180);
+        pros::delay(1000);
+        intakeController.setTarget(-180);
+        pros::delay(1000);
+        intakeController.setTarget(-180);
+        flywheel.brake();
 
-        // Intake Examples:
-        // spin 330 degrees
-        // intakeController->setTarget(330);
-        // wait for movement to finish
-        // intakeController->waitUntilSettled();
+        // Drive back, intake 3 discs, and shoot
+        chassis->driveToPoint({27.25_in, 5.5_in}, true);
+        intake.move(127);
+        chassis->driveToPoint({75.25_in, 53.5_in});
+        chassis->waitUntilSettled();
+        intake.brake();
+        chassis->driveToPoint({123.25_in, 53.5_in});
+        chassis->driveToPoint({123.25_in, 65.5_in}, true);
+        flywheel.move(92);
+        chassis->waitUntilSettled();
+        intakeController.setTarget(-180);
+        pros::delay(1000);
+        intakeController.setTarget(-180);
+        pros::delay(1000);
+        intakeController.setTarget(-180);
+        flywheel.brake();
 
-        // Flywheel Examples:
-        // spin flywheel forward at max voltage (-127 to +127)
-        // flywheel.move(127);
-        // stop flywheel
-        // flywheel.brake();
+        // Intake 3 more discs and shoot
+        chassis->driveToPoint({123.25_in, 53.5_in});
+        intake.move(127);
+        chassis->driveToPoint({51.25_in, 125.5_in});
+        chassis->waitUntilSettled();
+        intake.brake();
+        chassis->driveToPoint({65.5_in, 125.5_in}, true);
+        flywheel.move(92);
+        chassis->waitUntilSettled();
+        intakeController.setTarget(-180);
+        pros::delay(1000);
+        intakeController.setTarget(-180);
+        pros::delay(1000);
+        intakeController.setTarget(-180);
+        flywheel.brake();
+
+        // Intake 3 more discs, spin 2 rollers, fire 3 discs, shoot string from corner
+        chassis->driveToPoint({51.25_in, 125.5_in});
+        chassis->driveToPoint({87.25_in, 89.5_in}, true);
+        intake.move(127);
+        chassis->driveToPoint({128.75_in, 126.5_in});
+        chassis->waitUntilSettled();
+        intake.brake();
+        chassis->driveToPoint({104.5_in, 102.5_in}, true);
+        chassis->driveToPoint({104.5_in, 126.5_in}, true); // adjust for roller
+        chassis->waitUntilSettled();
+        intakeController->setTarget(330);
+        intakeController->waitUntilSettled();
+        chassis->driveToPoint({104.5_in, 102.5_in});
+        chassis->driveToPoint({126.5_in, 102.5_in}, true); // adjust for roller
+        chassis->waitUntilSettled();
+        intakeController->setTarget(330);
+        intakeController->waitUntilSettled();
+        chassis->driveToPoint({123.25_in, 102.5_in});
+        chassis->driveToPoint({123.25_in, 65.5_in});
+        flywheel.move(92);
+        chassis->waitUntilSettled();
+        intakeController.setTarget(-180);
+        pros::delay(1000);
+        intakeController.setTarget(-180);
+        pros::delay(1000);
+        intakeController.setTarget(-180);
+        flywheel.brake();
+        chassis->driveToPoint({128.75_in, 126.5_in}, true);
+        chassis->turnToAngle(-135_deg);
+        stringLauncher1.set_value(1);
+        stringLauncher2.set_value(1);
     }
 }
