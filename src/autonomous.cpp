@@ -23,8 +23,14 @@ void autonomous() {
         // Set the odometric starting position
         chassis->setState({0_in, 0_in, 0_deg});
 
-        // Turn PD
+        //go back, hit roller, turn, shoot two disks
+        //chassis->setMaxVelocity(420);
         chassis->turnToAngle(90_deg);
+        //chassis ->driveToPoint({-10_in, 0_in});
+        //intakeController->setTarget(330);
+        //intakeController->waitUntilSettled();
+        //chassis->driveToPoint({0_in, 0_in});
+        //chassis->turnToAngle(-30_deg);
     }
 
     /**************************************
