@@ -3,5 +3,5 @@
 // Flywheel control functions
 void setFlywheelMotor() {
     // R1 forward, R2 disabled
-    flywheel = 127 * (controller1.getDigital(ControllerDigital::R1);
+    flywheel = (127.0 / 12.0 * 9.3) * (controller1.getDigital(ControllerDigital::R1));
 }
