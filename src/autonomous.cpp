@@ -53,21 +53,25 @@ void autonomous() {
         // Assumes robot is 13" wide and 17.5" long
         // Set the odometric starting position (front-middle align)
         // Notation: {Forward, Right}
-        chassis->setState({6.5_in, 29.5_in, 0_deg});
+        chassis->setMaxVelocity(300);
+        chassis->setState({2_in, 29.5_in, 0_deg});
+        intakeController->tarePosition();
 
         // Drive backwards and spin roller
-        chassis->driveToPoint({1.5_in, 29.5_in}, true); // adjust for roller 0 -> 1.5
+        chassis->driveToPoint({0_in, 29.5_in}, true); // adjust for roller 0 -> 1.5
         chassis->waitUntilSettled();
-        intakeController->setTarget(330);
+        intakeController->setTarget(-1200);
         intakeController->waitUntilSettled();
+        intakeController->tarePosition();
 
         // Drive to next roller, get disc, and spin
         chassis->driveToPoint({3.25_in, 29.5_in});
         intake.move(127);
+        chassis->setMaxVelocity(300);
         chassis->driveToPoint({27.25_in, 5.5_in});
         chassis->waitUntilSettled();
         intake.brake();
-        chassis->driveToPoint({27.25_in, 1.5_in}, true); // adjust for roller 0 -> 1.5
+        /*chassis->driveToPoint({27.25_in, 1.5_in}, true); // adjust for roller 0 -> 1.5
         chassis->waitUntilSettled();
         intakeController->setTarget(330);
         intakeController->waitUntilSettled();
@@ -148,5 +152,7 @@ void autonomous() {
         chassis->turnToAngle(-135_deg);
         stringLauncher1.set_value(1);
         stringLauncher2.set_value(1);
+    
+    */
     }
 }

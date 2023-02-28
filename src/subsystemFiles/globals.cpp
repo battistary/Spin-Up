@@ -33,14 +33,22 @@ std::shared_ptr<okapi::OdomChassisController> chassis =
     ChassisControllerBuilder()
         .withMotors({5, 6, 7}, {16, 17, 20})
         // Speed gearset, 36:48 gear ratio, 3.25" wheel diameter, 10.75" wheel track
-        .withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 10.875_in}, imev5BlueTPR})
+        .withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 11.65_in}, imev5BlueTPR})
+        //.withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 10.207_in}, imev5BlueTPR})
         .withGains(
             {0.00063, 0, 0.000013},	// Distance controller gains
-            {0.00180, 0, 0.000038}) // Turn controller gains
-            //{0.00205, 0, 0.000042})	// Old turn controller gains
+            {0.0015, 0, 0.00003})
+            //{0.00180, 0, 0.000038}) // Turn controller gains
 //           {0.001,   0, 0.0001  })	// Angle controller gains
         .withOdometry() // Use the same scales as the chassis (above) for odometry
         .withMaxVelocity(600)
+        .withLogger(
+          std::make_shared<Logger>(
+            TimeUtilFactory::createDefault().getTimer(), // It needs a Timer
+            "/ser/sout", // Output to the PROS terminal
+            Logger::LogLevel::debug // Most verbose log level
+          )
+        )
         .buildOdometry();
 
 // Intake Controller
