@@ -344,7 +344,8 @@
     "upload_options": {
       "slot": 2,
       "icon": "pros",
-      "description": "EZ ticket 2 worlds"
+      "description": "EZ ticket 2 worlds",
+      "after": "run"
     }
   }
 }
