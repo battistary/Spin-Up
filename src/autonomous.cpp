@@ -77,7 +77,7 @@ void autonomous() {
         rotate(135, 50);
         chassis->moveDistance(-1.75_in) // adjusted for roller 0 -> 1.5
         chassis->waitUntilSettled();
-        intakeController->setTarget(330);
+        intakeController->setTarget(-1200);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
 
@@ -87,13 +87,13 @@ void autonomous() {
         chassis->moveDistance(51.25_in);
         flywheel.move(127.0 / 12.0 * 9.3); // 9.3v scaled out of 127
         chassis->waitUntilSettled();
-        intakeController->setTarget(-180);
+        intakeController->setTarget(-500);
         intakeController->tarePosition();
         pros::delay(1000);
-        intakeController->setTarget(-180);
+        intakeController->setTarget(-500);
         intakeController->tarePosition();
         pros::delay(1000);
-        intakeController->setTarget(-180);
+        intakeController->setTarget(-500);
         intakeController->tarePosition();
         pros::delay(1000);
         flywheel.brake();
@@ -111,13 +111,13 @@ void autonomous() {
         chassis->moveDistance(3.25_in);
         flywheel.move(127.0 / 12.0 * 9.3); // 9.3v scaled out of 127
         chassis->waitUntilSettled();
-        intakeController->setTarget(-180);
+        intakeController->setTarget(-500);
         intakeController->tarePosition();
         pros::delay(1000);
-        intakeController->setTarget(-180);
+        intakeController->setTarget(-500);
         intakeController->tarePosition();
         pros::delay(1000);
-        intakeController->setTarget(-180);
+        intakeController->setTarget(-500);
         intakeController->tarePosition();
         pros::delay(1000);
         flywheel.brake();
@@ -133,13 +133,13 @@ void autonomous() {
         chassis->moveDistance(3.25_in);
         flywheel.move(127.0 / 12.0 * 9.3); // 9.3v scaled out of 127
         chassis->waitUntilSettled();
-        intakeController->setTarget(-180);
+        intakeController->setTarget(-500);
         intakeController->tarePosition();
         pros::delay(1000);
-        intakeController->setTarget(-180);
+        intakeController->setTarget(-5000);
         intakeController->tarePosition();
         pros::delay(1000);
-        intakeController->setTarget(-180);
+        intakeController->setTarget(-5000);
         intakeController->tarePosition();
         pros::delay(1000);
         intakeController->tarePosition();
@@ -159,14 +159,14 @@ void autonomous() {
         rotate(-130, 50);
         chassis->moveDistance(-25.75_in); // adjust for roller 0 -> 1.5
         chassis->waitUntilSettled();
-        intakeController->setTarget(330);
+        intakeController->setTarget(-1200);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
         chassis->moveDistance(25.75_in);
         rotate(-90, 50);
         chassis->moveDistance(-25.75_in); // adjust for roller 126.5 -> 125
         chassis->waitUntilSettled();
-        intakeController->setTarget(330);
+        intakeController->setTarget(-1200);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
         chassis->moveDistance(1.75_in);
@@ -174,13 +174,13 @@ void autonomous() {
         chassis->moveDistance(51.25_in);
         flywheel.move(127.0 / 12.0 * 9.3); // 9.3v scaled out of 127
         chassis->waitUntilSettled();
-        intakeController->setTarget(-180);
+        intakeController->setTarget(-500);
         intakeController->tarePosition();
         pros::delay(1000);
-        intakeController->setTarget(-180);
+        intakeController->setTarget(-500);
         intakeController->tarePosition();
         pros::delay(1000);
-        intakeController->setTarget(-180);
+        intakeController->setTarget(-500);
         intakeController->tarePosition();
         pros::delay(1000);
         flywheel.brake();
