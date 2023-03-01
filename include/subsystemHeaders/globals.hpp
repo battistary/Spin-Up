@@ -27,7 +27,7 @@ extern pros::ADIDigitalOut stringLauncher2;
 extern pros::Imu imu;
 
 // Chassis Controller
-extern std::shared_ptr<okapi::OdomChassisController> chassis;
+extern std::shared_ptr<okapi::ChassisController> chassis;
 
 // Intake Controller
 extern std::shared_ptr<AsyncPositionController<double, double>> intakeController;
