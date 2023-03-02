@@ -18,7 +18,7 @@ void autonomous() {
     /**************************************
     *        Left side match auton        *
     **************************************/
-
+/*
     if (selector::auton == 1 || selector::auton == -1) {
         // Set the odometric starting position
         chassis->setState({0_in, 0_in, 0_deg});
@@ -38,11 +38,11 @@ void autonomous() {
         //chassis->driveToPoint({0_in, 0_in});
         //chassis->turnToAngle(-30_deg);
     }
-
+*/
     /**************************************
     *        Right side match auton       *
     **************************************/
-
+/**
     else if (selector::auton == 2 || selector::auton == -2) {
         // Set the odometric starting position
         chassis->setState({0_in, 0_in, 0_deg});
@@ -50,12 +50,12 @@ void autonomous() {
         // Distance PD Test
         chassis->driveToPoint({48_in, 0_in});
     }
-
+*/
     /**************************************
     *             Skills auton            *
     **************************************/
 
-    else if (selector::auton == 0) {
+    if (selector::auton == 0){
         // Assumes robot is 13" wide and 17.5" long
         // Tare intake motor starting position
         intakeController->tarePosition();
@@ -68,14 +68,14 @@ void autonomous() {
         intakeController->tarePosition();
 
         // Drive to next roller, get disc, and spin
-        chassis->moveDistance(1.75_in);
+        chassis->moveDistance(7.75_in); // was 1.75"
         intake.move(127);
         rotate(-45, 50);
         chassis->moveDistance(33.94112549695428_in);
         chassis->waitUntilSettled();
         intake.brake();
-        rotate(135, 50);
-        chassis->moveDistance(-1.75_in) // adjusted for roller 0 -> 1.5
+        rotate(135, 70);
+        chassis->moveDistance(-1.75_in); // adjusted for roller 0 -> 1.5
         chassis->waitUntilSettled();
         intakeController->setTarget(-1200);
         intakeController->waitUntilSettled();
