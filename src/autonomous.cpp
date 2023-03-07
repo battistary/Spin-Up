@@ -31,7 +31,7 @@ void autonomous() {
         pros::lcd::initialize();
         while ( true ) {
             pros::lcd::set_text(2, std::to_string(imu.get_rotation()));
-            pros::delay(1000);
+            pros::delay(500);
         }
         
         //go back, hit roller, turn, shoot two disks
@@ -81,10 +81,9 @@ void autonomous() {
         rotate(90, 38);
         chassis->moveDistance(-4.5_in); // adjusted for roller 0 -> 1.5
         chassis->waitUntilSettled();
-        intake.move(-1200);
-        //intakeController->setTarget(-1200);
-        //intakeController->waitUntilSettled();
-        //intakeController->tarePosition();
+        intakeController->setTarget(-1200);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
 
         // Drive to goal and shoot 3 discs
         chassis->moveDistance(3_in);
@@ -94,15 +93,18 @@ void autonomous() {
         flywheel.move(127.0 / 12.0 * 9.3); // 9.3v scaled out of 127
         pros::delay(3000);
         chassis->waitUntilSettled();
-        intakeController->setTarget(500);
-        intakeController->tarePosition();
-        pros::delay(1000);
         intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(1000);
+        pros::delay(500);
         intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(1000);
+        pros::delay(500);
+        intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+        pros::delay(500);
         flywheel.brake();
 
         // Drive back, intake 3 discs, and shoot
@@ -120,14 +122,17 @@ void autonomous() {
         pros::delay(3000);
         chassis->waitUntilSettled();
         intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(1000);
+        pros::delay(500);
         intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(1000);
+        pros::delay(500);
         intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(1000);
+        pros::delay(500);
         flywheel.brake();
 
         // Intake 3 more discs and shoot
@@ -143,16 +148,17 @@ void autonomous() {
         pros::delay(3000);
         chassis->waitUntilSettled();
         intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(1000);
-        intakeController->setTarget(-5000);
+        pros::delay(500);
+        intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(1000);
-        intakeController->setTarget(-5000);
+        pros::delay(500);
+        intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(1000);
-        intakeController->tarePosition();
-        pros::delay(1000);
+        pros::delay(500);
         flywheel.brake();
 
         // Intake 3 more discs, spin 2 rollers, fire 3 discs, shoot string from corner
@@ -185,14 +191,17 @@ void autonomous() {
         pros::delay(3000);
         chassis->waitUntilSettled();
         intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(1000);
+        pros::delay(500);
         intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(1000);
+        pros::delay(500);
         intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(1000);
+        pros::delay(500);
         flywheel.brake();
         chassis->moveDistance(-75.25_in);
         rotate(-135, 38);
