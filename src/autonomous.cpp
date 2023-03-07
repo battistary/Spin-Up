@@ -1,4 +1,6 @@
 #include "main.h"
+#include "pros/llemu.hpp"
+#include "pros/rtos.hpp"
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -18,22 +20,23 @@ void autonomous() {
     /**************************************
     *        Left side match auton        *
     **************************************/
-/*
+
     if (selector::auton == 1 || selector::auton == -1) {
-        // Set the odometric starting position
-        chassis->setState({0_in, 0_in, 0_deg});
-        
+        chassis->moveDistance(48_in);
+
+    }
+        /*
         // 90 degree gyro rotation test @ 50/127v
-        rotate(90, 50);
+        rotate(90, 38);
         pros::lcd::initialize();
         while ( true ) {
-            pros::lcd::set_text(2, std::to_string(imu.get_heading()));
+            pros::lcd::set_text(2, std::to_string(imu.get_rotation()));
             pros::delay(1000);
         }
         
         //go back, hit roller, turn, shoot two disks
         //chassis ->driveToPoint({-10_in, 0_in});
-        //intakeController->setTarget(330);
+        //intakeController->setTarget(338);
         //intakeController->waitUntilSettled();
         //chassis->driveToPoint({0_in, 0_in});
         //chassis->turnToAngle(-30_deg);
@@ -55,39 +58,47 @@ void autonomous() {
     *             Skills auton            *
     **************************************/
 
-    if (selector::auton == 0){
+    else if (selector::auton == 0){
         // Assumes robot is 13" wide and 17.5" long
         // Tare intake motor starting position
+        pros::lcd::initialize();
+        pros::lcd::set_text(1, std::to_string(imu.get_rotation()));
+        pros::delay(3000);
         intakeController->tarePosition();
 
         // Drive backwards 2" and spin roller
-        chassis->moveDistance(-2_in); // adjusted for roller 0 -> 1.5
+        chassis->moveDistance(-2.5_in); // adjusted for roller 0 -> 1.5
         chassis->waitUntilSettled();
         intakeController->setTarget(-1200);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
 
         // Drive to next roller, get disc, and spin
-        chassis->moveDistance(7.75_in); // was 1.75"
-        intake.move(127);
-        rotate(-45, 50);
+        chassis->moveDistance(5_in); // 7.75" to clear roller
+        rotate(-45, 38);
+        pros::lcd::set_text(1, std::to_string(imu.get_rotation()));
+        intake.move(-127);
         chassis->moveDistance(33.94112549695428_in);
         chassis->waitUntilSettled();
         intake.brake();
-        rotate(135, 70);
-        chassis->moveDistance(-1.75_in); // adjusted for roller 0 -> 1.5
+        rotate(135, 38);
+        pros::lcd::set_text(2, std::to_string(imu.get_rotation()));
+        chassis->moveDistance(-4.5_in); // adjusted for roller 0 -> 1.5
         chassis->waitUntilSettled();
-        intakeController->setTarget(-1200);
-        intakeController->waitUntilSettled();
-        intakeController->tarePosition();
+        intake.move(-1200);
+        //intakeController->setTarget(-1200);
+        //intakeController->waitUntilSettled();
+        //intakeController->tarePosition();
 
         // Drive to goal and shoot 3 discs
-        chassis->moveDistance(1.75_in);
-        rotate(-90, 50);
+        chassis->moveDistance(3_in);
+        pros::lcd::set_text(3, std::to_string(imu.get_rotation()));
+        rotate(-90, 38);
         chassis->moveDistance(51.25_in);
         flywheel.move(127.0 / 12.0 * 9.3); // 9.3v scaled out of 127
+        pros::delay(3000);
         chassis->waitUntilSettled();
-        intakeController->setTarget(-500);
+        intakeController->setTarget(500);
         intakeController->tarePosition();
         pros::delay(1000);
         intakeController->setTarget(-500);
@@ -101,15 +112,16 @@ void autonomous() {
         // Drive back, intake 3 discs, and shoot
         chassis->moveDistance(-51.25_in);
         intake.move(127);
-        rotate(45, 50);
+        rotate(45, 38);
         chassis->moveDistance(67.88225099390856_in);
         chassis->waitUntilSettled();
         intake.brake();
-        rotate(-45, 50);
+        rotate(-45, 38);
         chassis->moveDistance(48_in);
-        rotate(-90, 50);
+        rotate(-45, 38);
         chassis->moveDistance(3.25_in);
         flywheel.move(127.0 / 12.0 * 9.3); // 9.3v scaled out of 127
+        pros::delay(3000);
         chassis->waitUntilSettled();
         intakeController->setTarget(-500);
         intakeController->tarePosition();
@@ -125,13 +137,14 @@ void autonomous() {
         // Intake 3 more discs and shoot
         chassis->moveDistance(-3.25_in);
         intake.move(127);
-        rotate(-135, 50);
+        rotate(-135, 38);
         chassis->moveDistance(101.8233764908628_in);
         chassis->waitUntilSettled();
         intake.brake();
-        rotate(45, 50);
+        rotate(45, 38);
         chassis->moveDistance(3.25_in);
         flywheel.move(127.0 / 12.0 * 9.3); // 9.3v scaled out of 127
+        pros::delay(3000);
         chassis->waitUntilSettled();
         intakeController->setTarget(-500);
         intakeController->tarePosition();
@@ -148,31 +161,32 @@ void autonomous() {
 
         // Intake 3 more discs, spin 2 rollers, fire 3 discs, shoot string from corner
         chassis->moveDistance(-3.25_in);
-        rotate(-45, 50);
+        rotate(135, 38);
         chassis->moveDistance(-2.121320343559643_in);
         intake.move(127);
-        rotate(-90, 50);
+        rotate(135, 38);
         chassis->moveDistance(2.121320343559643_in);
         chassis->waitUntilSettled();
         intake.brake();
         chassis->moveDistance(-1.414213562373095_in);
-        rotate(-130, 50);
+        rotate(-135, 38);
         chassis->moveDistance(-25.75_in); // adjust for roller 0 -> 1.5
         chassis->waitUntilSettled();
         intakeController->setTarget(-1200);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
         chassis->moveDistance(25.75_in);
-        rotate(-90, 50);
+        rotate(-90, 38);
         chassis->moveDistance(-25.75_in); // adjust for roller 126.5 -> 125
         chassis->waitUntilSettled();
         intakeController->setTarget(-1200);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
         chassis->moveDistance(1.75_in);
-        rotate(90, 50);
+        rotate(90, 38);
         chassis->moveDistance(51.25_in);
         flywheel.move(127.0 / 12.0 * 9.3); // 9.3v scaled out of 127
+        pros::delay(3000);
         chassis->waitUntilSettled();
         intakeController->setTarget(-500);
         intakeController->tarePosition();
@@ -185,7 +199,7 @@ void autonomous() {
         pros::delay(1000);
         flywheel.brake();
         chassis->moveDistance(-75.25_in);
-        rotate(-45, 50);
+        rotate(-45, 38);
         stringLauncher1.set_value(1);
         stringLauncher2.set_value(1);
     }

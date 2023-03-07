@@ -51,27 +51,30 @@ void rotate(int degrees, int voltage) {
     // Define a direction based on the units provided
     int direction = abs(degrees) / degrees;
     // Reset gyro rotation
-    imu.tare_heading();
+    imu.tare_rotation();
     // Turn until units - 5 degrees are reached
     setDrive(voltage * direction, -voltage * direction);
     while ( fabs(imu.get_rotation()) < abs(degrees) - 5 ) {
         pros::delay(10);
     }
     // Wait for robot to loose momentum before performing corrections
+    setDrive(0, 0);
     pros::delay(100);
     // Correct for overshoot
     if ( fabs(imu.get_rotation()) > abs(degrees) ) {
-        setDrive(0.5 * -voltage * direction, 0.5 * voltage * direction);
-        while ( fabs(imu.get_rotation()) > abs(degrees) ) {
-            pros::delay(10);
-        }
-    // Correct for undershoot
-    } else if ( fabs(imu.get_rotation()) < abs(degrees) ) {
-        setDrive(0.5 * voltage * direction, 0.5 * -voltage * direction);
+        setDrive(-38 * direction, 38 * direction);
         while ( fabs(imu.get_rotation()) > abs(degrees) ) {
             pros::delay(10);
         }
     }
+    // Correct for undershoot
+    else if ( fabs(imu.get_rotation()) < abs(degrees) ) {
+        setDrive(38 * direction, -38 * direction);
+        while ( fabs(imu.get_rotation()) < abs(degrees) ) {
+            pros::delay(10);
+        }
+    }
     // Reset drive to zero
-    setDrive(0, 0);
+       setDrive(0, 0);
+       resetDriveEncoders();
 }

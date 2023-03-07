@@ -11,10 +11,10 @@ okapi::Controller controller2(ControllerId::partner);
 pros::Motor driveLeftFront(5, pros::E_MOTOR_GEARSET_06, true, pros::E_MOTOR_ENCODER_COUNTS);
 pros::Motor driveLeftCenter(6, pros::E_MOTOR_GEARSET_06, true, pros::E_MOTOR_ENCODER_COUNTS);
 pros::Motor driveLeftBack(7, pros::E_MOTOR_GEARSET_06, true, pros::E_MOTOR_ENCODER_COUNTS);
-pros::Motor driveRightFront(18, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
-pros::Motor driveRightCenter(19, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
+pros::Motor driveRightFront(16, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
+pros::Motor driveRightCenter(17, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
 pros::Motor driveRightBack(20, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
-pros::Motor flywheel(11, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
+pros::Motor flywheel(11, pros::E_MOTOR_GEARSET_06, true, pros::E_MOTOR_ENCODER_COUNTS);
 pros::Motor intake(9, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES);
 
 // Motor Groups
@@ -27,7 +27,6 @@ pros::ADIDigitalOut stringLauncher2('B', false);
 
 // Inertial Sensor
 pros::Imu imu(4);
-
 // Chassis Controller
 std::shared_ptr<okapi::ChassisController> chassis =
     ChassisControllerBuilder()
@@ -36,8 +35,8 @@ std::shared_ptr<okapi::ChassisController> chassis =
         //.withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 25_in}, imev5BlueTPR})
         .withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 10.75_in}, imev5BlueTPR})
         .withGains(
-            {0.00063, 0, 0.000013},	// Distance controller gains
-            {0.0019,  0, 0.000024}) // Turn controller gains*/
+            {0.00063, 0, 0.000015},	// Distance controller gains
+            {0.0019,  0, 0.000024})     // Turn controller gains
 //          {0.001,   0, 0.0001  })	// Angle controller gains
         .withMaxVelocity(600)
         .build();
