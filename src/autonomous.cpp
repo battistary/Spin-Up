@@ -1,4 +1,5 @@
 #include "main.h"
+#include "okapi/api/chassis/controller/chassisController.hpp"
 #include "pros/llemu.hpp"
 #include "pros/rtos.hpp"
 
@@ -22,38 +23,88 @@ void autonomous() {
     **************************************/
 
     if (selector::auton == 1 || selector::auton == -1) {
-        chassis->moveDistance(48_in);
-
-    }
-        /*
-        // 90 degree gyro rotation test @ 50/127v
-        rotate(90, 38);
+        // Assumes robot is 13" wide and 17.5" long
+        // Jig (back-middle) tile align
+        // Tare intake motor starting position
         pros::lcd::initialize();
-        while ( true ) {
-            pros::lcd::set_text(2, std::to_string(imu.get_rotation()));
-            pros::delay(500);
-        }
+        intakeController->tarePosition();
         
-        //go back, hit roller, turn, shoot two disks
-        //chassis ->driveToPoint({-10_in, 0_in});
-        //intakeController->setTarget(338);
-        //intakeController->waitUntilSettled();
-        //chassis->driveToPoint({0_in, 0_in});
-        //chassis->turnToAngle(-30_deg);
-    }
-*/
+        chassis->moveDistance(-2.5_in); // Jig-roller distance
+        chassis->waitUntilSettled();
+        intakeController->setTarget(-1200);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+    }   
+
     /**************************************
     *        Right side match auton       *
     **************************************/
-/**
-    else if (selector::auton == 2 || selector::auton == -2) {
-        // Set the odometric starting position
-        chassis->setState({0_in, 0_in, 0_deg});
 
-        // Distance PD Test
-        chassis->driveToPoint({48_in, 0_in});
+    else if (selector::auton == 2 || selector::auton == -2) {
+        // Assumes robot is 13" wide and 17.5" long
+        // Front-middle tile align
+        // Tare intake motor starting position
+        pros::lcd::initialize();
+        intakeController->tarePosition();
+
+        // Drive forward, intake third disc, turn, and shoot
+        intake.move(127);
+        chassis->moveDistance(20.75_in);
+        chassis->waitUntilSettled();
+        intake.brake();
+        rotate(30, 38);
+        flywheel.move(127.0 / 12.0 * 9.3); // 9.3v scaled out of 127
+        pros::delay(3000);
+        chassis->waitUntilSettled();
+        intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+        pros::delay(500);
+        intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+        pros::delay(500);
+        intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+        pros::delay(500);
+        flywheel.brake();
+
+        // Intake 2 more discs, shoot
+        rotate(-45, 38);
+        intake.move(127);
+        chassis->moveDistance(33.94112549695428_in);
+        chassis->waitUntilSettled();
+        intake.brake();
+        rotate(45, 38);
+        flywheel.move(127.0 / 12.0 * 9.3); // 9.3v scaled out of 127
+        pros::delay(3000);
+        chassis->waitUntilSettled();
+        intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+        pros::delay(500);
+        intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+        pros::delay(500);
+        intakeController->setTarget(-500);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+        pros::delay(500);
+        flywheel.brake();
+
+        // Turn, drive back to roller, spin roller
+        rotate(-45, 38);
+        chassis->moveDistance(-67.88225099390856_in);
+        rotate(0, 38);
+        chassis->moveDistance(-4.5_in);
+        chassis->waitUntilSettled();
+        intakeController->setTarget(-1200);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
     }
-*/
+
     /**************************************
     *             Skills auton            *
     **************************************/
@@ -74,7 +125,7 @@ void autonomous() {
         // Drive to next roller, get disc, and spin
         chassis->moveDistance(5_in); // 7.75" to clear roller
         rotate(-45, 38);
-        intake.move(-127);
+        intake.move(127);
         chassis->moveDistance(33.94112549695428_in);
         chassis->waitUntilSettled();
         intake.brake();
