@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "PROS-test",
+    "project_name": "PROS-Code",
     "target": "v5",
     "templates": {
       "autoSelect": {
@@ -342,7 +342,7 @@
       }
     },
     "upload_options": {
-      "slot": 2,
+      "slot": 1,
       "icon": "pros",
       "description": "EZ ticket 2 worlds",
       "after": "run"
