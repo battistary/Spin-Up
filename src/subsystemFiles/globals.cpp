@@ -1,5 +1,7 @@
 #include "main.h"
 #include "pros/adi.hpp"
+#include "pros/misc.h"
+#include "pros/misc.hpp"
 #include "pros/motors.h"
 
 // Controllers
@@ -27,7 +29,8 @@ pros::ADIDigitalOut stringLauncher2('B', false);
 
 // Inertial Sensor
 pros::Imu imu(4);
-// Chassis Controller
+
+// Chassis Controller PID
 std::shared_ptr<okapi::ChassisController> chassis =
     ChassisControllerBuilder()
         .withMotors({5, 6, 7}, {16, 17, 20})
@@ -40,6 +43,16 @@ std::shared_ptr<okapi::ChassisController> chassis =
 //          {0.001,   0, 0.0001  })	// Angle controller gains
         .withMaxVelocity(600)
         .build();
+
+// Chassis Controller NO PID
+std::shared_ptr<okapi::ChassisController> NOPIDchassis =
+    ChassisControllerBuilder()
+      .withMotors({5, 6, 7}, {16, 17, 20})
+      // Speed gearset, 36:48 gear ratio, 3.25" wheel diameter, 10.75" wheel track0
+      //.withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 25_in}, imev5BlueTPR})
+      .withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 10.75_in}, imev5BlueTPR})
+      .withMaxVelocity(600)
+      .build();
 
 // Intake Controller
 std::shared_ptr<AsyncPositionController<double, double>> intakeController = 

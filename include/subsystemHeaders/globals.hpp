@@ -1,9 +1,11 @@
 #include "main.h"
 #include "pros/adi.hpp"
+#include "pros/misc.hpp"
 
 // Controllers
 extern okapi::Controller controller1;
 extern okapi::Controller controller2;
+extern pros::Controller master;
 
 // Motors
 extern pros::Motor driveLeftFront;
@@ -28,6 +30,9 @@ extern pros::Imu imu;
 
 // Chassis Controller
 extern std::shared_ptr<okapi::ChassisController> chassis;
+
+// Chassis Controller NO PID
+extern std::shared_ptr<okapi::ChassisController> NOPIDchassis;
 
 // Intake Controller
 extern std::shared_ptr<AsyncPositionController<double, double>> intakeController;
