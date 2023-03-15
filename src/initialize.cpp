@@ -1,5 +1,6 @@
 #include "main.h"
 #include "pros/llemu.h"
+#include "pros/llemu.hpp"
 #include "pros/motors.h"
 #include "pros/rtos.h"
 #include "pros/screen.hpp"
@@ -11,6 +12,10 @@
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
+
+	// Initialize screen
+	pros::lcd::initialize();
+
 	// Drive motors
 	driveLeftBack.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	driveLeftCenter.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
