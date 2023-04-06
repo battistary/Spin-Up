@@ -1,6 +1,10 @@
+#include "gif-pros/gifclass.hpp"
 #include "main.h"
 #include "pros/adi.hpp"
 #include "pros/misc.hpp"
+
+// Variables
+extern bool bloopin_time;
 
 // Controllers
 extern okapi::Controller controller1;
@@ -24,6 +28,7 @@ extern pros::Motor_Group driveRight;
 // ADI Digital Outs
 extern pros::ADIDigitalOut stringLauncher1;
 extern pros::ADIDigitalOut stringLauncher2;
+extern pros::ADIDigitalOut blooper;
 
 // Inertial Sensor
 extern pros::Imu imu;

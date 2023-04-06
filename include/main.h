@@ -76,6 +76,7 @@ void opcontrol(void);
 #include "subsystemHeaders/flywheel.hpp"
 #include "subsystemHeaders/intake.hpp"
 #include "subsystemHeaders/stringLauncher.hpp"
+#include "subsystemHeaders/blooper.hpp"
 #include "gif-pros/gifclass.hpp"
 #include "autoSelect/selection.h"
 #include "subsystemHeaders/globals.hpp"

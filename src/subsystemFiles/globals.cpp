@@ -26,6 +26,7 @@ pros::Motor_Group driveRight({driveRightBack, driveRightCenter, driveRightFront}
 // ADI Digital Outs
 pros::ADIDigitalOut stringLauncher1('A', false);
 pros::ADIDigitalOut stringLauncher2('B', false);
+pros::ADIDigitalOut blooper('H', false);
 
 // Inertial Sensor
 pros::Imu imu(4);
@@ -39,7 +40,7 @@ std::shared_ptr<okapi::ChassisController> chassis =
         .withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 10.75_in}, imev5BlueTPR})
         .withGains(
             {0.00063, 0, 0.000015},	// Distance controller gains
-            {0.0019,  0, 0.000024})     // Turn controller gains
+            {0.0019,  0, 0.000024}) // Turn controller gains
 //          {0.001,   0, 0.0001  })	// Angle controller gains
         .withMaxVelocity(600)
         .build();

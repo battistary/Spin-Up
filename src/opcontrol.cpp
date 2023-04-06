@@ -34,11 +34,12 @@ void opcontrol() {
 		chassis->getModel()->arcade(
 			controller1.getAnalog(ControllerAnalog::leftY),
 			controller1.getAnalog(ControllerAnalog::rightX));
-
 		// Control intake & rollerRoller
 		setIntakeMotor();
 		// Control flywheel
 		setFlywheelMotor();
+		// Control blooper
+		setBlooper();
 		// Control stringLaunchers
 		setStringLaunchers();
 		pros::delay(10);
