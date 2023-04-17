@@ -1,21 +1,32 @@
 #include "main.h"
 #include "pros/misc.h"
 
-bool launchString = true;
+bool launchStringLeft = false;
+bool launchStringRight = false;
 
 // String launcher control functions
 void setStringLaunchers() {
-  if (controller2.getDigital(ControllerDigital::A)) {
-    if (launchString) {
+  if ( controller2.getDigital(ControllerDigital::left) ) {
+    if ( launchStringLeft ) {
       stringLauncher1.set_value(1);
-      stringLauncher2.set_value(1);
-      launchString = false;
+      launchStringLeft = true;
       pros::delay(500);
     }
     else {
       stringLauncher1.set_value(0);
+      launchStringLeft = false;
+      pros::delay(500);
+    }
+  }
+  if ( controller2.getDigital(ControllerDigital::right) ) {
+    if ( launchStringRight ) {
+      stringLauncher2.set_value(1);
+      launchStringRight = true;
+      pros::delay(500);
+    }
+    else {
       stringLauncher2.set_value(0);
-      launchString = true;
+      launchStringRight = false;
       pros::delay(500);
     }
   }
