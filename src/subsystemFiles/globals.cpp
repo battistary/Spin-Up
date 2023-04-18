@@ -13,9 +13,9 @@ okapi::Controller controller2(ControllerId::partner);
 pros::Motor driveLeftFront(2, pros::E_MOTOR_GEARSET_06, true, pros::E_MOTOR_ENCODER_COUNTS);
 pros::Motor driveLeftCenter(3, pros::E_MOTOR_GEARSET_06, true, pros::E_MOTOR_ENCODER_COUNTS); // moved from port 6
 pros::Motor driveLeftBack(4, pros::E_MOTOR_GEARSET_06, true, pros::E_MOTOR_ENCODER_COUNTS);
-pros::Motor driveRightFront(16, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
-pros::Motor driveRightCenter(17, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
-pros::Motor driveRightBack(20, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
+pros::Motor driveRightFront(13, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
+pros::Motor driveRightCenter(18, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
+pros::Motor driveRightBack(19, pros::E_MOTOR_GEARSET_06, false, pros::E_MOTOR_ENCODER_COUNTS);
 pros::Motor flywheel(11, pros::E_MOTOR_GEARSET_06, true, pros::E_MOTOR_ENCODER_COUNTS);
 pros::Motor intake(9, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_DEGREES);
 
@@ -34,7 +34,7 @@ pros::Imu imu(1);
 // Chassis Controller PID
 std::shared_ptr<okapi::ChassisController> chassis =
     ChassisControllerBuilder()
-        .withMotors({2, 3, 4}, {16, 17, 20})
+        .withMotors({2, 3, 4}, {13, 18, 19})
         // Speed gearset, 36:48 gear ratio, 3.25" wheel diameter, 10.75" wheel track0
         //.withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 25_in}, imev5BlueTPR})
         .withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 10.75_in}, imev5BlueTPR})
@@ -48,7 +48,7 @@ std::shared_ptr<okapi::ChassisController> chassis =
 // Chassis Controller NO PID
 std::shared_ptr<okapi::ChassisController> NOPIDchassis =
     ChassisControllerBuilder()
-      .withMotors({2, 3, 4}, {16, 17, 20})
+      .withMotors({2, 3, 4}, {13, 18, 19})
       // Speed gearset, 36:48 gear ratio, 3.25" wheel diameter, 10.75" wheel track0
       //.withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 25_in}, imev5BlueTPR})
       .withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 10.75_in}, imev5BlueTPR})
