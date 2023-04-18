@@ -55,13 +55,83 @@ void autonomous() {
         // Tare intake motor starting position
         intakeController->tarePosition();
         
-        // Set NOPIDchassis controller max velocity
-        NOPIDchassis->setMaxVelocity(200);
+        // Set PIDchassis controller max velocity
+        chassis->setMaxVelocity(400);
 
+        //drive back, turn 90 degrees, and spin roller 
+        chassis ->moveDistance(-10_in);
+        chassis->waitUntilSettled();
+        rotate(-90, 30);
+        chassis->waitUntilSettled();
+        chassis ->moveDistance(-15_in);
+        chassis->waitUntilSettled();
+        intakeController->tarePosition();
+        intakeController->setTarget(800);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+        chassis->waitUntilSettled();
+        
+        //move forward and shoot two disks in the magazine
+        flywheel.move(127.0 / 12.0 * 12);
+        chassis -> moveDistance(26_in);
+        chassis->waitUntilSettled();
+        rotate(-97, 30);
+        chassis->waitUntilSettled();
+        //disk 1
+        intakeController->tarePosition();
+        intakeController->setTarget(300);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+        pros::delay(500);
+        //disk 2
+        intakeController->setTarget(300);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+        flywheel.brake();
+
+        //rotate to 45 degrees, pick up 3 disks 
+        rotate(45, 30);
+        chassis->waitUntilSettled();
+        intake.move(-127);
+        chassis->moveDistance(46_in);
+        chassis->waitUntilSettled();
+
+        //rotate to 45 degrees, move forward, and fire three disks
+        rotate(-45, 30);
+        flywheel.move(127.0 / 9.5 * 12);
+        chassis->waitUntilSettled();
+        chassis->moveDistance(5_in);
+        chassis->waitUntilSettled();
+        //disk 1
+         intakeController->tarePosition();
+        intakeController->setTarget(300);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+        pros::delay(500);
+        //disk 2
+        intakeController->setTarget(300);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+        //disk 3
+        intakeController->setTarget(300);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+        flywheel.brake();
+        
+        //ending stuff
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+        chassis->waitUntilSettled();
+        chassis->stop();
+        resetDriveEncoders();
+        chassis->stop();
+        resetDriveEncoders();
+
+    /*
         // Drive forward, intake third disc, turn, and shoot
         intake.move(-127);
         flywheel.move(127.0 / 12.0 * 12);
-        NOPIDchassis->moveDistance(20.75_in);
+        chassis->moveDistance(20.75_in);
         NOPIDchassis->waitUntilSettled();
         pros::delay(500);
         intake.brake();
@@ -88,7 +158,7 @@ void autonomous() {
         NOPIDchassis->waitUntilSettled();
 
         // Intake 2 more discs, shoot
-        /*rotate(-45, 38);
+        rotate(-45, 38);
         chassis->waitUntilSettled();
         intake.move(-127);
         flywheel.move(127.0 / 12.0 * 12); // 9.2v scaled out of 127
@@ -110,7 +180,7 @@ void autonomous() {
         pros::delay(200);
         flywheel.brake();
         chassis->moveDistance(-12_in);
-        chassis->waitUntilSettled();*/
+        chassis->waitUntilSettled();
 
         // Turn, drive back to roller, spin roller
         rotate(-45, 38);
@@ -130,6 +200,7 @@ void autonomous() {
         resetDriveEncoders();
         NOPIDchassis->stop();
         resetDriveEncoders();
+    */
     }
 
     /**************************************
@@ -296,7 +367,7 @@ void autonomous() {
         
 
 
-        /*chassis->moveDistance(101.8233764908628_in);
+        chassis->moveDistance(101.8233764908628_in);
         chassis->waitUntilSettled();
         intake.brake();
         rotate(-180, 38);
