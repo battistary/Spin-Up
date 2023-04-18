@@ -5,8 +5,8 @@ bool bloopin_time = false;
 
 // Blooper control functions
 void setBlooper() {
-  if (controller2.getDigital(ControllerDigital::A)) {
-    if ( bloopin_time ) {
+  if (controller1.getDigital(ControllerDigital::A)) { // Set to controller2 for comp
+    if ( bloopin_time == false ) {
       blooper.set_value(1);
       bloopin_time = true;
       pros::delay(500);

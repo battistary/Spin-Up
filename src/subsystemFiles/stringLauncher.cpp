@@ -7,7 +7,7 @@ bool launchStringRight = false;
 // String launcher control functions
 void setStringLaunchers() {
   if ( controller2.getDigital(ControllerDigital::left) ) {
-    if ( launchStringLeft ) {
+    if ( launchStringLeft == false ) {
       stringLauncher1.set_value(1);
       launchStringLeft = true;
       pros::delay(500);
@@ -19,7 +19,7 @@ void setStringLaunchers() {
     }
   }
   if ( controller2.getDigital(ControllerDigital::right) ) {
-    if ( launchStringRight ) {
+    if ( launchStringRight == false ) {
       stringLauncher2.set_value(1);
       launchStringRight = true;
       pros::delay(500);
