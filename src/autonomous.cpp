@@ -38,7 +38,7 @@ void autonomous() {
         
         NOPIDchassis->moveDistance(-5_in); // Jig-roller distance
         NOPIDchassis->waitUntilSettled();
-        intakeController->setTarget(-2400);
+        intakeController->setTarget(800);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
         NOPIDchassis->stop();
@@ -56,151 +56,70 @@ void autonomous() {
         intakeController->tarePosition();
         
         // Set PIDchassis controller max velocity
-        chassis->setMaxVelocity(400);
+        chassis->setMaxVelocity(600);
 
-        //drive back, turn 90 degrees, and spin roller 
-        chassis ->moveDistance(-10_in);
-        chassis->waitUntilSettled();
-        rotate(-90, 30);
-        chassis->waitUntilSettled();
-        chassis ->moveDistance(-15_in);
-        chassis->waitUntilSettled();
-        intakeController->tarePosition();
-        intakeController->setTarget(800);
-        intakeController->waitUntilSettled();
-        intakeController->tarePosition();
-        chassis->waitUntilSettled();
-        
-        //move forward and shoot two disks in the magazine
-        flywheel.move(127.0 / 12.0 * 12);
-        chassis -> moveDistance(26_in);
-        chassis->waitUntilSettled();
-        rotate(-97, 30);
-        chassis->waitUntilSettled();
-        //disk 1
-        intakeController->tarePosition();
-        intakeController->setTarget(300);
-        intakeController->waitUntilSettled();
-        intakeController->tarePosition();
-        pros::delay(500);
-        //disk 2
-        intakeController->setTarget(300);
-        intakeController->waitUntilSettled();
-        intakeController->tarePosition();
-        flywheel.brake();
-
-        //rotate to 45 degrees, pick up 3 disks 
-        rotate(45, 30);
-        chassis->waitUntilSettled();
-        intake.move(-127);
-        chassis->moveDistance(46_in);
-        chassis->waitUntilSettled();
-
-        //rotate to 45 degrees, move forward, and fire three disks
-        rotate(-45, 30);
-        flywheel.move(127.0 / 9.5 * 12);
-        chassis->waitUntilSettled();
-        chassis->moveDistance(5_in);
-        chassis->waitUntilSettled();
-        //disk 1
-         intakeController->tarePosition();
-        intakeController->setTarget(300);
-        intakeController->waitUntilSettled();
-        intakeController->tarePosition();
-        pros::delay(500);
-        //disk 2
-        intakeController->setTarget(300);
-        intakeController->waitUntilSettled();
-        intakeController->tarePosition();
-        //disk 3
-        intakeController->setTarget(300);
-        intakeController->waitUntilSettled();
-        intakeController->tarePosition();
-        flywheel.brake();
-        
-        //ending stuff
-        intakeController->waitUntilSettled();
-        intakeController->tarePosition();
-        chassis->waitUntilSettled();
-        chassis->stop();
-        resetDriveEncoders();
-        chassis->stop();
-        resetDriveEncoders();
-
-    /*
         // Drive forward, intake third disc, turn, and shoot
+        /*
         intake.move(-127);
-        flywheel.move(127.0 / 12.0 * 12);
-        chassis->moveDistance(20.75_in);
-        NOPIDchassis->waitUntilSettled();
+        flywheel.move(127.0 / 12.0 * 10.6);
+        chassis->moveDistance(24_in);
+        chassis->waitUntilSettled();
         pros::delay(500);
         intake.brake();
-        rotate(23, 38);
-        NOPIDchassis->waitUntilSettled();
-        NOPIDchassis->moveDistance(4_in);
-        NOPIDchassis->waitUntilSettled();
+        rotate(24, 38);
+        chassis->waitUntilSettled();
         intakeController->tarePosition();
-        intakeController->setTarget(300);
+        intakeController->setTarget(420);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(500);
-        intakeController->setTarget(300);
+        flywheel.move(127.0 / 12.0 * 10.95);
+        intakeController->setTarget(420);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(500);
-        intakeController->setTarget(300);
+        intakeController->setTarget(420);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(200);
         flywheel.brake();
-        NOPIDchassis->setMaxVelocity(100);
-        NOPIDchassis->moveDistance(-5.25_in); // reduced 0.5"s
-        NOPIDchassis->waitUntilSettled();
 
         // Intake 2 more discs, shoot
-        rotate(-45, 38);
+        rotate(-42, 38);
         chassis->waitUntilSettled();
         intake.move(-127);
-        flywheel.move(127.0 / 12.0 * 12); // 9.2v scaled out of 127
-        chassis->moveDistance(33.94112549695428_in);
+        flywheel.move(127.0 / 12.0 * 9.70);
+        chassis->moveDistance(29_in);
         chassis->waitUntilSettled();
-        pros::delay(1000);
-        intake.brake();
         rotate(45, 38);
         chassis->waitUntilSettled();
-        chassis->moveDistance(12_in);
+        chassis->moveDistance(4_in);
+        intake.brake();
         intakeController->tarePosition();
-        intakeController->setTarget(100);
+        intakeController->setTarget(420);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(200);
-        intakeController->setTarget(100);
+        flywheel.move(127.0 / 12.0 * 10.25);
+        intakeController->setTarget(420);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        pros::delay(200);
         flywheel.brake();
-        chassis->moveDistance(-12_in);
-        chassis->waitUntilSettled();
 
         // Turn, drive back to roller, spin roller
+        chassis->moveDistance(-3_in);
         rotate(-45, 38);
-        NOPIDchassis->waitUntilSettled();
-        NOPIDchassis->moveDistance(-32_in);
-        NOPIDchassis->waitUntilSettled();
-        rotate(3, 38);
-        NOPIDchassis->waitUntilSettled();
-        NOPIDchassis->moveDistance(-4.5_in);
-        NOPIDchassis->waitUntilSettled();
+        chassis->waitUntilSettled();
+        intake.move(127);
+        NOPIDchassis->moveDistance(-69.5_in); // -69.5
+        chassis->waitUntilSettled();
         intakeController->tarePosition();
         intakeController->setTarget(800);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        NOPIDchassis->waitUntilSettled();
-        NOPIDchassis->stop();
+        chassis->waitUntilSettled();
+        chassis->stop();
         resetDriveEncoders();
-        NOPIDchassis->stop();
-        resetDriveEncoders();
-    */
+        */
+
+        chassis->moveDistance(48_in);
+
     }
 
     /**************************************

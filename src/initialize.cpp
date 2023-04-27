@@ -57,6 +57,8 @@ void initialize() {
 void disabled() {
 	// Autonomous selector
 	selector::init();
+	chassis->stop();
+	resetDriveEncoders();
 }
 
 /**
