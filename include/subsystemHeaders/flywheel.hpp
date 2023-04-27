@@ -2,3 +2,5 @@
 
 // Intake control functions
 void setFlywheelMotor();
+
+void flywheelTBHLoop();

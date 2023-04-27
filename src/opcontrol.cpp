@@ -27,7 +27,7 @@ void opcontrol() {
 	stringLauncher2.set_value(0);
 
 	// Display gif image on brain screen
-	static Gif gif("/usd/logo_stretched.gif", lv_scr_act());
+	//static Gif gif("/usd/logo_stretched.gif", lv_scr_act());
 
 	while (true) {
 		// Control drivetrain
@@ -37,7 +37,8 @@ void opcontrol() {
 		// Control intake & rollerRoller
 		setIntakeMotor();
 		// Control flywheel
-		setFlywheelMotor();
+		//setFlywheelMotor();
+		flywheelTBHLoop();
 		// Control blooper
 		setBlooper();
 		// Control stringLaunchers
