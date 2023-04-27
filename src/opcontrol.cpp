@@ -29,6 +29,9 @@ void opcontrol() {
 	// Display gif image on brain screen
 	static Gif gif("/usd/logo_stretched.gif", lv_scr_act());
 
+	chassis->stop();
+	resetDriveEncoders();
+
 	while (true) {
 		// Control drivetrain
 		chassis->getModel()->arcade(
