@@ -4,3 +4,5 @@
 void setFlywheelMotor();
 
 void flywheelTBHLoop();
+
+void resetFlywheelTBH();

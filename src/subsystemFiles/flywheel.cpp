@@ -1,13 +1,12 @@
 #include "main.h"
+#include "okapi/impl/device/controllerUtil.hpp"
 
 // Flywheel TBH loop variables
-double current_rpm = 0.0;
-double target_rpm = 0.0;
+float current_fw_rpm = 0.0;
 double error = 0.0;
 double prev_error = 0.0;
-double output = 0.0;
 double tbh = 0.0;
-float gain = 0.0;
+float gain = 0.01; //0.01;
 
 // Flywheel control functions
 void setFlywheelMotor() {
@@ -23,20 +22,39 @@ void setFlywheelMotor() {
 
 void flywheelTBHLoop() {
     // Get the current RPM of the flywheel
-    current_rpm = flywheel.get_actual_velocity();
+    current_fw_rpm = flywheel.get_actual_velocity();
     
     // Calculate the error between the current RPM and the target RPM
-    error = target_rpm - current_rpm;
+    error = target_fw_rpm - current_fw_rpm;
 
-    output += gain * error;
+    fw_output += gain * error;
 
     if ( (error > 0 && prev_error < 0) || (error < 0 && prev_error > 0) ) {
-        output = 0.5 * (output + tbh);
-        tbh = output;
+        fw_output = 0.5 * (fw_output + tbh);
+        tbh = fw_output;
         prev_error = error;
     }
+    
+    if ( controller1.getDigital(ControllerDigital::R1) ) {
+        // Set the flywheel motor speeds based on the fw_output voltage
+        flywheel.move_velocity(fw_output);
+    }
+    else {
+        current_fw_rpm = flywheel.get_actual_velocity();
+        fw_output = 0.0;
+        tbh = 0.0;
+        prev_error = 0.0;
+        flywheel.brake();
+    }
+    pros::lcd::set_text(1, std::to_string(current_fw_rpm));
+}
 
-    // Set the flywheel motor speeds based on the output voltage
-    pros::lcd::set_text(1, std::to_string(output));
-    flywheel.move_velocity(output);
+void resetFlywheelTBH() {
+    if ( controller1.getDigital(ControllerDigital::Y) ) {
+        flywheel.brake();
+        double error = 0.0;
+        double prev_error = 0.0;
+        fw_output = 0.0;
+        double tbh = 0.0;
+    }
 }
