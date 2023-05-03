@@ -33,6 +33,9 @@ void autonomous() {
         // Tare intake motor starting position
         intakeController->tarePosition();
 
+        // Start flywheel
+        flywheel.move(127.0 / 12.0 * 11.5);
+
         // Set NOPIDchassis controller max velocity
         NOPIDchassis->setMaxVelocity(50);
         
@@ -41,8 +44,17 @@ void autonomous() {
         intakeController->setTarget(800);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        NOPIDchassis->stop();
-        resetDriveEncoders();
+        intakeController->setTarget(420);
+        intakeController->waitUntilSettled();
+        intakeController->tarePosition();
+
+        chassis->moveDistance(12_in);
+        intake.move(-127);
+        chassis->waitUntilSettled();
+        rotate(-30, 38);
+        intakeController->setTarget(420);
+        intakeController->waitUntilSettled();
+        
     }   
 
     /**************************************
@@ -59,14 +71,14 @@ void autonomous() {
         chassis->setMaxVelocity(600);
 
         // Drive forward, intake third disc, turn, and shoot
-        /*
+        
         intake.move(-127);
         flywheel.move(127.0 / 12.0 * 10.6);
         chassis->moveDistance(24_in);
         chassis->waitUntilSettled();
         pros::delay(500);
         intake.brake();
-        rotate(24, 38);
+        rotate(26, 38);
         chassis->waitUntilSettled();
         intakeController->tarePosition();
         intakeController->setTarget(420);
@@ -85,6 +97,7 @@ void autonomous() {
         rotate(-42, 38);
         chassis->waitUntilSettled();
         intake.move(-127);
+        target_fw_rpm = 485.0;
         flywheel.move(127.0 / 12.0 * 9.70);
         chassis->moveDistance(29_in);
         chassis->waitUntilSettled();
@@ -96,7 +109,7 @@ void autonomous() {
         intakeController->setTarget(420);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
-        flywheel.move(127.0 / 12.0 * 10.25);
+        flywheel.move(127.0 / 12.0 * 10.4);
         intakeController->setTarget(420);
         intakeController->waitUntilSettled();
         intakeController->tarePosition();
@@ -116,10 +129,6 @@ void autonomous() {
         chassis->waitUntilSettled();
         chassis->stop();
         resetDriveEncoders();
-        */
-
-        chassis->moveDistance(48_in);
-
     }
 
     /**************************************
