@@ -4,6 +4,10 @@
 #include "pros/misc.hpp"
 #include "pros/motors.h"
 
+// Variables
+double fw_output = 0.0;
+float target_fw_rpm = 0.0;
+
 // Controllers
 okapi::Controller controller1(ControllerId::master);
 okapi::Controller controller2(ControllerId::partner);
@@ -39,9 +43,9 @@ std::shared_ptr<okapi::ChassisController> chassis =
         //.withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 25_in}, imev5BlueTPR})
         .withDimensions({AbstractMotor::gearset::blue, (48.0 / 36.0)}, {{3.25_in, 10.75_in}, imev5BlueTPR})
         .withGains(
-            {0.0015,  0, 0.00008 }, //{0.00063, 0, 0.000014},	// Distance controller gains
+            {0.0015, 0.0, 0.000048},//{0.0015,  0, 0.00008 }, //{0.00063, 0, 0.000014},	// Distance controller gains
             {0.0019,  0, 0.000024}, // Turn controller gains
-            {0.001,   0, 0.0001  })	// Angle controller gains
+            {0.0015, 0.0, 0.000048})//{0.001,   0, 0.0001  })	// Angle controller gains
         .withMaxVelocity(600)
         .build();
 

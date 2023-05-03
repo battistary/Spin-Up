@@ -5,6 +5,8 @@
 
 // Variables
 extern bool bloopin_time;
+extern double fw_output;
+extern float target_fw_rpm;
 
 // Controllers
 extern okapi::Controller controller1;

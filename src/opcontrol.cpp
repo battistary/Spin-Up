@@ -26,6 +26,9 @@ void opcontrol() {
 	stringLauncher1.set_value(0);
 	stringLauncher2.set_value(0);
 
+	// Set target flywheel rpm for TBH controller
+	target_fw_rpm = 462.5;
+
 	// Display gif image on brain screen
 	//static Gif gif("/usd/logo_stretched.gif", lv_scr_act());
 
@@ -42,6 +45,7 @@ void opcontrol() {
 		// Control flywheel
 		//setFlywheelMotor();
 		flywheelTBHLoop();
+		resetFlywheelTBH();
 		// Control blooper
 		setBlooper();
 		// Control stringLaunchers
